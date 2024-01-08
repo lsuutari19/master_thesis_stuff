@@ -1,0 +1,51 @@
+Terraform:
+
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
+}
+
+resource "docker_network" "internal_network" {
+  name = "internal_network"
+}
+
+resource "docker_container" "web_server" {
+  name   = "web_server"
+  image  = "nginx"  # or your preferred web server image
+  ports  = ["80:80"]
+  network_mode = docker_network.internal_network.name
+}
+
+resource "docker_container" "probe_machine" {
+  name   = "probe_machine"
+  image  = "ubuntu"  # or your preferred Linux distribution image
+  network_mode = docker_network.internal_network.name
+}
+
+Docker compose:
+
+version: '3'
+
+services:
+  web_server:
+    image: nginx  # or your preferred web server image
+    container_name: web_server
+    ports:
+      - "80:80"
+    networks:
+      - internal_network
+
+  probe_machine:
+    image: ubuntu  # or your preferred Linux distribution image
+    container_name: probe_machine
+    networks:
+      - internal_network
+
+networks:
+  internal_network:
+    driver: bridge
+
+
+VMs
+
+VM1 Apache web server
+VM2 Probe machine (ubuntu)
