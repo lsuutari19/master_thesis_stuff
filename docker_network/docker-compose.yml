@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+
+  # firewall:
+  #   image: 0xcaff/simple-firewall:latest
+  #   cap_add:
+  #     - net_admin
+  #   environment:
+  #     ALLOW_IP_ADDRESS: 52.218.200.155
+  #     ALLOW_PORT: 80
+  #     ALLOW_PROTO: tcp
+  #     FIREWALL_READY_SIGNAL_PORT: 60000
+
+  web-server:
+    image: httpd:latest
+    # ports:
+    #   - "80:80"
+    volumes:
+      - ./scripts/:/scripts/
+    networks:
+      - internal_network
+    # command: "/scripts/wait-for localhost:6000 -- ./scripts/test.sh"
+    
+  probe_machine:
+    image: alpine:latest
+    networks:
+      - internal_network
+    command: ["tail", "-f", "/dev/null"]
+
+networks:
+  internal_network:
+    driver: bridge
+    # driver: 'service:firewall'
