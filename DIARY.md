@@ -40,6 +40,43 @@ Teemu: every related course is built on top of:
 
 Problems with self-created VM that will be provided to students:
 - Could not start the machine pfSense because the following physical network interfaces were not found:
-vboxnet0 (adapter 1), wlan0 (adapter 2)
+vboxnet0 (adapter 1), wlan0 (adapter 2),
 You can either change the machine's network settings or stop the machine.
-- Need to create a 
+- Need to create the host only adapter yourself and use that in the network settings of the VM that contains pfSense
+
+# 11/1/2024
+Started the day by testing out Asad's pre-made VM with pfsense installed, needed to Assign Interfaces in the CLI, but afterwise the connection was smooth.
+It was pretty straight forward, just create a host-only network, then create local debug.rules file in ~ , configure it to allow access from the client machine and
+outward access to the virtualbox VMs IP that has the pfsense. Was feeling under the weather so did a half-day.
+
+# 12/1 - 15/1/2024
+Working on debugging why the VM doesn't have an IP / DHCP lease.
+
+When starting the terraform apply on a new session:
+    Error defining libvirt domain: virError(Code=8, Domain=10, Message='invalid argument: could not get preferred machine for /usr/bin/qemu-system-x86_64 type=kvm').
+
+Solution: export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
+
+Network exists/Vm/pool storage exists:
+________________________________________________________
+virsh net-destroy vm_network1
+virsh pool-destroy vm_pool1
+virsh net-undefine vm_network1
+virsh pool-undefine vm_pool1
+virsh vol-delete --pool vm_pool1 /tmp/terraform-provider-libvirt-pool/vm-0_volume.qcow2
+virsh vol-delete --pool vm_pool1 /tmp/terraform-provider-libvirt-pool/vm_cloudinit.iso
+
+created a cleanup script from these
+
+Error: Error: couldn't retrieve IP address of domain.Please check following:
+1) is the domain running proplerly?
+2) has the network interface an IP address?
+3) Networking issues on your libvirt setup?
+ 4) is DHCP enabled on this Domain's network?
+5) if you use bridge network, the domain should have the pkg qemu-agent installed
+IMPORTANT: This error is not a terraform libvirt-provider error, but an error caused by your KVM/libvirt infrastructure configuration/setup
+ timeout while waiting for state to become 'all-addresses-obtained' (last state: 'waiting-addresses', timeout: 5m0s)
+
+Same configurations with Ubuntu image works, but with pfSense image the IP address cant be retrieved.
+
+

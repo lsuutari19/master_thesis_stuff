@@ -1,0 +1,9 @@
+terraform.tfstate*
+pfSense*
+.terraform.lock.hcl
+.terraform
+libvirt-terraform
+pfSense.img
+terraform_kvm/pfSense.img
+*.img
+*.gcov2
