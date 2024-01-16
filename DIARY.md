@@ -79,4 +79,6 @@ IMPORTANT: This error is not a terraform libvirt-provider error, but an error ca
 
 Same configurations with Ubuntu image works, but with pfSense image the IP address cant be retrieved.
 
+# 16/1/2024
+Working on previous issue, perhaps changing /confic/network_config to give a static IP address could work, going to test at home environment with dhcp = false. Test first with dhcp = true and figure out if it is something to do with dnsmasq? If not also check the /etc/rc.conf/ on the pfSense VM manually through the shell. Otherwise no clue what else to do.
 
