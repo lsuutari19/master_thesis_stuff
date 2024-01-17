@@ -37,7 +37,7 @@ resource "libvirt_domain" "domain-opnsense" {
 
   network_interface {
     network_name   = "default"
-    # wait_for_lease = true
+    wait_for_lease = true
     # hostname       = var.vm_hostname
   }
 
@@ -45,6 +45,12 @@ resource "libvirt_domain" "domain-opnsense" {
     type        = "pty"
     target_port = "0"
     target_type = "serial"
+  }
+
+  console {
+    type        = "pty"
+    target_type = "virtio"
+    target_port = "1"
   }
 
   disk {

@@ -98,7 +98,7 @@ https://blog.nihilism.network/servers/pf_virt/index.html
 
 # 17/01/2024
 Try to use opnsense as an alternative for the terraform deployment.
-Niklas posted some images in the cybsec slack channel that could prove useful.
+Niklas posted some VM images in the cybsec slack channel that could prove useful.
 Remember that Freebsd OS images differ a bit from Ubuntu images, take this into consideration.
 
 Having students understand how UDP/TCP is handled through firewall would be good for students.
@@ -107,6 +107,9 @@ Niklas:
     - We should still continue looking at easy deployment
     - Create tasks at Asad's system, then port them over to the deployed vm after.
 
-efi bootloader and amd64
+Got opnsense (amd64) to deploy with terraform and libvirt, it doesn't get allocated an IP address however, but installation is smooth!
+
+Followed this:
+https://github.com/Mosibi/centos8-terraform/
 
 
