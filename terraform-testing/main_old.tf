@@ -1,4 +1,3 @@
-#   export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
 provider "libvirt" {
   uri = "qemu:///system"
 }
@@ -10,8 +9,8 @@ resource "libvirt_pool" "ubuntu" {
 }
 
 resource "libvirt_volume" "ubuntu-qcow2" {
-  name   = "ubuntu-qcow2"
-  pool   = libvirt_pool.ubuntu.name
+  name = "ubuntu-qcow2"
+  pool = libvirt_pool.ubuntu.name
   source = var.ubuntu_18_img_url
   format = "qcow2"
 }
@@ -39,9 +38,9 @@ resource "libvirt_domain" "domain-ubuntu" {
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
-    network_name = "default"
-    # wait_for_lease = true
-    hostname = var.vm_hostname
+    network_name   = "default"
+    wait_for_lease = true
+    hostname       = var.vm_hostname
   }
 
   console {

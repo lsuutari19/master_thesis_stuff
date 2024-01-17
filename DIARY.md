@@ -82,3 +82,17 @@ Same configurations with Ubuntu image works, but with pfSense image the IP addre
 # 16/1/2024
 Working on previous issue, perhaps changing /confic/network_config to give a static IP address could work, going to test at home environment with dhcp = false. Test first with dhcp = true and figure out if it is something to do with dnsmasq? If not also check the /etc/rc.conf/ on the pfSense VM manually through the shell. Otherwise no clue what else to do.
 
+Testing with https://stackoverflow.com/questions/71208688/terraform-libvirt-trouble-with-bridged-network now.
+
+Things for 17/1/2024 meeting:
+- issues with DHCP giving IP address to the freebsd pfSense VM --> timeouts when wait_for_lease is true
+    - works if the image is the default ubuntu image...
+        - Maybe the VM doesnt get into a state where it could ask for an IP address, I thought the IP address would be natively assigned automatically in libvirt
+- pfSense installer doesn't recognize the storage disk terraform creates for it
+- still would need a lot of time to implement the correct network configurations Asad has configured and connection to docker containers (which would propably be handled by terraform/libvirt automatically)
+
+Try to force it to get an IP address like:
+qemu-kvm -netdev tap,id=net0,ifname=tap0 \
+  -device virtio-net-pci,netdev=net0,mac=12:34:56:78:9a:bc \
+  -drive file=mydisk.img,if=virtio \
+  -m 1024 -vnc :1
