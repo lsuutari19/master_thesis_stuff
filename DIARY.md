@@ -86,13 +86,27 @@ Testing with https://stackoverflow.com/questions/71208688/terraform-libvirt-trou
 
 Things for 17/1/2024 meeting:
 - issues with DHCP giving IP address to the freebsd pfSense VM --> timeouts when wait_for_lease is true
-    - works if the image is the default ubuntu image...
-        - Maybe the VM doesnt get into a state where it could ask for an IP address, I thought the IP address would be natively assigned automatically in libvirt
+- the default libvirt NAT based network should configure it automatically
+    - works if the image is the default ubuntu (pre-installed image...
+        - Maybe the VM doesnt get into a state where it could ask for an IP address, I thought the IP address would be natively assigned automatically in libvirt (it doesn't)
 - pfSense installer doesn't recognize the storage disk terraform creates for it
 - still would need a lot of time to implement the correct network configurations Asad has configured and connection to docker containers (which would propably be handled by terraform/libvirt automatically)
 
-Try to force it to get an IP address like:
-qemu-kvm -netdev tap,id=net0,ifname=tap0 \
-  -device virtio-net-pci,netdev=net0,mac=12:34:56:78:9a:bc \
-  -drive file=mydisk.img,if=virtio \
-  -m 1024 -vnc :1
+check this blog:
+https://blog.nihilism.network/servers/pf_virt/index.html
+
+
+# 17/01/2024
+Try to use opnsense as an alternative for the terraform deployment.
+Niklas posted some images in the cybsec slack channel that could prove useful.
+Remember that Freebsd OS images differ a bit from Ubuntu images, take this into consideration.
+
+Having students understand how UDP/TCP is handled through firewall would be good for students.
+
+Niklas:
+    - We should still continue looking at easy deployment
+    - Create tasks at Asad's system, then port them over to the deployed vm after.
+
+efi bootloader and amd64
+
+

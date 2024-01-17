@@ -1,17 +1,10 @@
-#   export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
 provider "libvirt" {
   uri = "qemu:///system"
 }
 
-resource "libvirt_pool" "ubuntu" {
-  name = "ubuntu"
-  type = "dir"
-  path = var.libvirt_disk_path
-}
-
-resource "libvirt_volume" "ubuntu-qcow2" {
-  name   = "ubuntu-qcow2"
-  pool   = libvirt_pool.ubuntu.name
+resource "libvirt_volume" "opnsense-qcow2" {
+  name = "opnsense-qcow2"
+  pool = "default"
   source = var.ubuntu_18_img_url
   format = "qcow2"
 }
@@ -27,21 +20,25 @@ data "template_file" "network_config" {
 resource "libvirt_cloudinit_disk" "commoninit" {
   name           = "commoninit.iso"
   user_data      = data.template_file.user_data.rendered
-  network_config = data.template_file.network_config.rendered
-  pool           = libvirt_pool.ubuntu.name
+  pool           = "default"
 }
 
-resource "libvirt_domain" "domain-ubuntu" {
+resource "libvirt_domain" "domain-opnsense" {
   name   = var.vm_hostname
-  memory = "512"
-  vcpu   = 1
+  memory = "2048"
+  vcpu   = 2
+  machine = "pc-q35-3.1"
+  
+  xml {
+    xslt = file("cdrom-model.xsl")
+  }
 
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
-    network_name = "default"
+    network_name   = "default"
     # wait_for_lease = true
-    hostname = var.vm_hostname
+    # hostname       = var.vm_hostname
   }
 
   console {
@@ -50,14 +47,8 @@ resource "libvirt_domain" "domain-ubuntu" {
     target_type = "serial"
   }
 
-  console {
-    type        = "pty"
-    target_type = "virtio"
-    target_port = "1"
-  }
-
   disk {
-    volume_id = libvirt_volume.ubuntu-qcow2.id
+    volume_id = libvirt_volume.opnsense-qcow2.id
   }
 
   graphics {
