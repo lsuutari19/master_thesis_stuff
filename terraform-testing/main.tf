@@ -1,11 +1,12 @@
+#   export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
 provider "libvirt" {
-  uri = "qemu:///system"
+   uri = "qemu:///system"
 }
 
 resource "libvirt_volume" "opnsense-qcow2" {
   name = "opnsense-qcow2"
   pool = "default"
-  source = var.ubuntu_18_img_url
+  source = var.opnsense_img_url
   format = "qcow2"
 }
 
@@ -27,7 +28,7 @@ resource "libvirt_domain" "domain-opnsense" {
   name   = var.vm_hostname
   memory = "2048"
   vcpu   = 2
-  machine = "pc-q35-3.1"
+  machine = "q35"
   
   xml {
     xslt = file("cdrom-model.xsl")
@@ -37,7 +38,7 @@ resource "libvirt_domain" "domain-opnsense" {
 
   network_interface {
     network_name   = "default"
-    wait_for_lease = true
+    # wait_for_lease = true
     # hostname       = var.vm_hostname
   }
 
@@ -64,3 +65,6 @@ resource "libvirt_domain" "domain-opnsense" {
   }
 
 }
+
+
+

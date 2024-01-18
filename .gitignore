@@ -6,8 +6,6 @@ libvirt-terraform
 pfSense.img
 terraform_kvm/pfSense.img
 *.img
-*.gcow2
-opnsense.qcow2
-OPNsense-aarch.qcow2
-opensense.qcow2
+*.qcow2
+*.tfstate
 

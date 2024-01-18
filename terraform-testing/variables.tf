@@ -3,12 +3,14 @@ variable "libvirt_disk_path" {
   default     = "/opt/kvm/pool1"
 }
 
-variable "ubuntu_18_img_url" {
+variable "opnsense_img_url" {
   description = "opnsense image"
-  # default     = "http://cloud-images.ubuntu.com/releases/bionic/release-20191008/ubuntu-18.04-server-cloudimg-amd64.img"
-  # default = "pfSense.img"
-  # default = "https://atxfiles.netgate.com/mirror/downloads/pfSense-CE-2.7.2-RELEASE-amd64.iso.gz"
   default = "opensense.qcow2"
+}
+
+variable "ubuntu_img_url" {
+  description = "ubuntu image"
+  default     = "http://cloud-images.ubuntu.com/releases/bionic/release-20191008/ubuntu-18.04-server-cloudimg-amd64.img"
 }
 
 variable "vm_hostname" {

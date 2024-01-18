@@ -113,3 +113,20 @@ Followed this:
 https://github.com/Mosibi/centos8-terraform/
 
 
+Tips:
+__________________________________________________________________________________________
+Make sure to have all the required installations: libvirtd, terraform, qemu etc.
+Set interface IP address to match the network to get an IP address for the VM
+
+
+Problem solutions in kvm creation:
+__________________________________________________________________________________________
+Error: Error while uploading source opensense.qcow2: Error while copying source to volume virError(Code=38, Domain=38, Message='cannot write to stream: No space left on device'
+    - Make sure the file has completed copying to the system
+Error: Error defining libvirt domain: virError(Code=67, Domain=10, Message='unsupported configuration: Emulator '/usr/bin/qemu-system-x86_64' does not support virt type 'kvm'')
+    1. export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
+    2. use "qemu-system-x86_64 -machine help" to list all available machines, select one of the pc-q35 machines and change main.tf machine = "q35" to match this.
+Error: VM doesnt start default installation
+    - Make sure all terraform resources got successfully created at once, run "terraform destroy" and "terraform apply" to create them again.
+
+do we want ssh connection? 
