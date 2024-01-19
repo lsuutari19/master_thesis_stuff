@@ -24,6 +24,13 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   pool           = "default"
 }
 
+resource "libvirt_network" "internal-network" {
+  name = "cyber-range-LAN"
+  mode = "nat"
+  addresses = ["10.10.10.10/24"]
+}
+
+
 resource "libvirt_domain" "domain-opnsense" {
   name   = var.vm_hostname
   memory = "2048"
@@ -38,8 +45,10 @@ resource "libvirt_domain" "domain-opnsense" {
 
   network_interface {
     network_name   = "default"
-    # wait_for_lease = true
-    # hostname       = var.vm_hostname
+  }
+
+  network_interface {
+    network_name = libvirt_network.internal-network.name
   }
 
   console {
