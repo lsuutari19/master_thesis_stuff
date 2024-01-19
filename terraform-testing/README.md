@@ -3,7 +3,7 @@
 ## Install and setup libvirtd
 ```
 sudo apt update
-sudo apt install qemu-kvm libvirt-daemon-system
+sudo apt install qemu-kvm libvirt-daemon-system virt-top libguestfs-tools
 sudo adduser $USER libvirt
 ```
 
@@ -27,6 +27,7 @@ terraform --version
 
 ### install virt-manager for VM accessibility
 ```
+sudo apt-get install virt-install virt-viewer
 sudo apt-get install virt-manager
 ```
 
