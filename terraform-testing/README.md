@@ -1,6 +1,11 @@
 # Installation instructions
 
 ## Install and setup libvirtd
+```
+sudo apt update
+sudo apt install qemu-kvm libvirt-daemon-system
+sudo adduser $USER libvirt
+```
 
 Start and enable libvirtd
 ```

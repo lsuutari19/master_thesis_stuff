@@ -96,7 +96,7 @@ check this blog:
 https://blog.nihilism.network/servers/pf_virt/index.html
 
 
-# 17/01/2024
+# 17/01/2024 - 19/01/2024
 Try to use opnsense as an alternative for the terraform deployment.
 Niklas posted some VM images in the cybsec slack channel that could prove useful.
 Remember that Freebsd OS images differ a bit from Ubuntu images, take this into consideration.
