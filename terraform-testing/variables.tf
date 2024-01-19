@@ -5,7 +5,7 @@ variable "libvirt_disk_path" {
 
 variable "opnsense_img_url" {
   description = "opnsense image"
-  default = "opensense.qcow2"
+  default = "opnsense.qcow2"
 }
 
 variable "ubuntu_img_url" {
