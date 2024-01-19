@@ -31,6 +31,7 @@ sudo apt-get install virt-manager
 ```
 
 ### install qemu and verify the installation
+https://www.qemu.org/download/#linux
 ```
 qemu-system-x86_64 --version
 ```
