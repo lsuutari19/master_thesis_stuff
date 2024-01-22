@@ -130,3 +130,17 @@ Error: VM doesnt start default installation
     - Make sure all terraform resources got successfully created at once, run "terraform destroy" and "terraform apply" to create them again.
 
 do we want ssh connection? 
+
+# 22/1/2024
+Still issues in accessing the opnsense from host machine have tried setting rules like:
+    - pass in quick on <wan_interface> from <host_wan_ipaddress> keep state
+    - pass in quick on <wan_interface> from <opnsense_lan_address> keep state
+    - pass in quick on <wan_interface> from <host_wan_ipaddr> to <opnsense_lan_address> keep state
+    - pass in quick on <wan_interface> from <host_wan_ipaddr> to <opnsense_wan_address> keep state
+    - disabling all rules
+So far only managed to ping the WAN address of the KVM running opnsense... only idea is to keep
+modifying the rules.debug file and testing out different rules. Pinging from opnsense to host works fine, so it is
+firewall/networking related. Disabled pf rules completely, now the other Ubuntu in the WAN network can ping the opnsense vm.
+
+Testing with the Ubuntu/Lubuntu desktop edition if that VM can reach the web GUI
+ --> Too slow and wonky problems with mouse etc, not a viable solution for students to use.

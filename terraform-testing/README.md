@@ -43,13 +43,20 @@ https://github.com/maurice-w/opnsense-vm-images/releases/tag/23.7.11
 
 Make sure the variables.tf variable matches path to the file:
 
-(this looks for the image in the directory where the main.tf is)
+(this looks for the image "opnsense.qcow2" in the directory where the main.tf is)
 ```
 variable "opnsense_img_url" {
   description = "opnsense image"
   default = "opnsense.qcow2"
 }
 ```
+
+### Install mkisofs
+```
+sudo apt-get install -y mkisofs
+```
+
+### 
 
 ### Terraform magic
 ```

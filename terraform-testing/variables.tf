@@ -10,7 +10,7 @@ variable "opnsense_img_url" {
 
 variable "ubuntu_img_url" {
   description = "ubuntu image"
-  default     = "http://cloud-images.ubuntu.com/releases/bionic/release-20191008/ubuntu-18.04-server-cloudimg-amd64.img"
+  default     = "lubuntu.iso"
 }
 
 variable "vm_hostname" {
