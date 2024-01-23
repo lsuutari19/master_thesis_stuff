@@ -144,3 +144,6 @@ firewall/networking related. Disabled pf rules completely, now the other Ubuntu 
 
 Testing with the Ubuntu/Lubuntu desktop edition if that VM can reach the web GUI
  --> Too slow and wonky problems with mouse etc, not a viable solution for students to use.
+
+lan vtnet0 192.168.1.1./24
+wan vtnet1 192.168.0.59/24

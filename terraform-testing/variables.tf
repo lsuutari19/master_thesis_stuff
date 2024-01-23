@@ -10,7 +10,8 @@ variable "opnsense_img_url" {
 
 variable "ubuntu_img_url" {
   description = "ubuntu image"
-  default     = "lubuntu.iso"
+  # default = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
+  default = "https://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img"
 }
 
 variable "vm_hostname" {
