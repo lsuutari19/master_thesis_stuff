@@ -28,6 +28,26 @@ resource "libvirt_network" "internal-network" {
   name = "cyber-range-LAN"
   mode = "nat"
   addresses = ["10.10.10.10/24"]
+  dns {
+    enabled = true
+  }
+  dhcp {
+    enabled = true
+  }
+}
+
+# testing with a self created default network
+# delete this and change network_interface { networ_name = "default" } to use previous config
+resource "libvirt_network" "default_network" {
+    name = "default_network"
+    mode = "nat"
+    addresses = ["192.168.122.1/24"]
+    dns {
+      enabled = true
+    }
+    dhcp {
+      enabled = true
+    }
 }
 
 
@@ -44,7 +64,7 @@ resource "libvirt_domain" "domain-opnsense" {
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
-    network_name   = "default"
+    network_name   = libvirt_network.default_network.name
   }
 
   network_interface {
@@ -74,6 +94,3 @@ resource "libvirt_domain" "domain-opnsense" {
   }
 
 }
-
-
-
