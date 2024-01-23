@@ -37,7 +37,7 @@ resource "libvirt_network" "internal-network" {
 }
 
 # testing with a self created default network
-# delete this and change network_interface { networ_name = "default" } to use previous config
+# delete this and change network_interface { network_name = "default" } to use previous config
 resource "libvirt_network" "default_network" {
     name = "default_network"
     mode = "nat"

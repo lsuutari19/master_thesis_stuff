@@ -148,4 +148,6 @@ Testing with the Ubuntu/Lubuntu desktop edition if that VM can reach the web GUI
 lan vtnet0 192.168.1.1./24
 wan vtnet1 192.168.0.59/24
 
-the host PC is now able to reach the VM WAN, still need to figure out how to access the VM LAN address for the web GUI 
+the host PC is now able to reach the VM WAN, still need to figure out how to access the VM LAN address for the web GUI
+
+Got access to VM LAN from host had to configure it to point out to 192.168.122.xxx, now needs to get the web gui up and running as well.
