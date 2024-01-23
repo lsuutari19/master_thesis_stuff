@@ -40,7 +40,7 @@ if [[ $result == *default* ]]; then
     echo "VM pool storages could not be destroyed."
     exit 1;
 else
-    echo "VM domains have been destroyed."
+    echo "VM pool storages have been destroyed."
 fi
 
 
