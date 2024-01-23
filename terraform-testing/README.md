@@ -41,14 +41,7 @@ https://github.com/maurice-w/opnsense-vm-images/releases/tag/23.7.11
 
 (I am currently using the OPNsense-23.7.11-ufs-efi-vm-amd64.qcow2.bz2)
 
-Make sure the variables.tf variable matches path to the file:
-
-(this looks for the image "opnsense.qcow2" in the directory where the main.tf is)
-```
-variable "opnsense_img_url" {
-  description = "opnsense image"
-  default = "opnsense.qcow2"
-}
+Move the image to terraform-testing directory and rename it opnsense.qcow2
 ```
 
 ### Install mkisofs
@@ -67,3 +60,35 @@ terraform apply
 
 ### If you want to deploy the docker containers you need to have docker engine running
 (Otherwise just change the extension of docker.tf from tf to txt)
+
+
+## Issues & fixes:
+```
+problem:
+Error: Error defining libvirt domain: virError(Code=67, Domain=10, Message='unsupported configuration: Emulator '/usr/bin/qemu-system-x86_64' does not support virt type 'kvm'')
+
+solution 1:
+try export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
+
+solution2:
+enable virtualization in the host system
+```
+
+```
+problem:
+pool default not found
+
+solution:
+sudo virsh pool-define /dev/stdin <<EOF
+<pool type='dir'>
+  <name>default</name>
+  <target>
+    <path>/var/lib/libvirt/images</path>
+  </target>
+</pool>
+EOF
+
+sudo virsh pool-start default
+sudo virsh pool-autostart default
+```
+
