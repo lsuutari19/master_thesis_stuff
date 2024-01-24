@@ -1,9 +1,9 @@
 # Installation instructions
 
-## Install and setup libvirtd
+## Install and setup libvirtd and necessary packages for UEFI virtualization
 ```
 sudo apt update
-sudo apt install qemu-kvm libvirt-daemon-system virt-top libguestfs-tools
+sudo apt-get install qemu-kvm libvirt-daemon-system virt-top libguestfs-tools ovmf
 sudo adduser $USER libvirt
 ```
 
@@ -48,8 +48,6 @@ Move the image to terraform-testing directory and rename it opnsense.qcow2
 sudo apt-get install -y mkisofs
 ```
 
-### 
-
 ### Terraform magic
 ```
 export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
@@ -89,5 +87,10 @@ EOF
 
 sudo virsh pool-start default
 sudo virsh pool-autostart default
+```
+
+```
+problem: VM is stuck at "booting from hard disk..."
+solution: Verify that you have installed the OVMF package to allow for UEFI virtualization
 ```
 

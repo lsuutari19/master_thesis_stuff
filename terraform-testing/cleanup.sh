@@ -31,17 +31,17 @@ else
     echo "VM networks have been destroyed."
 fi
 
-# Command to destroy the pool storage
-sudo virsh pool-destroy default
-sudo virsh pool-undefine default
+# # Command to destroy the pool storage
+# sudo virsh pool-destroy default
+# sudo virsh pool-undefine default
 
-result=$(sudo virsh pool-list --all)
-if [[ $result == *default* ]]; then
-    echo "VM pool storages could not be destroyed."
-    exit 1;
-else
-    echo "VM pool storages have been destroyed."
-fi
+# result=$(sudo virsh pool-list --all)
+# if [[ $result == *default* ]]; then
+#     echo "VM pool storages could not be destroyed."
+#     exit 1;
+# else
+#     echo "VM pool storages have been destroyed."
+# fi
 
 
 # Command to delete volumes
