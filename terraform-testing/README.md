@@ -1,10 +1,13 @@
 # Installation instructions
 
+This installation instruction is designed for Ubuntu operating system.
+
 ## Install and setup libvirtd and necessary packages for UEFI virtualization
 ```
 sudo apt update
 sudo apt-get install qemu-kvm libvirt-daemon-system virt-top libguestfs-tools ovmf
 sudo adduser $USER libvirt
+sudo usermod -aG libvirt $(whoami)
 ```
 
 Start and enable libvirtd
@@ -47,6 +50,34 @@ Move the image to terraform-testing directory and rename it opnsense.qcow2
 ```
 sudo apt-get install -y mkisofs
 ```
+
+### Install xsltproc 
+```
+sudo apt-get install xsltproc
+```
+
+### Initialize default storage pool if it hasn't been created by libvirt
+
+```
+sudo virsh pool-define /dev/stdin <<EOF
+<pool type='dir'>
+  <name>default</name>
+  <target>
+    <path>$PWD/images</path>
+  </target>
+</pool>
+EOF
+
+sudo virsh pool-start default
+sudo virsh pool-autostart default
+```
+
+### Configure user permisions for libvirt to storage pool
+```
+sudo chown -R $(whoami):libvirt ~/images
+sudo systemctl restart libvirtd
+```
+
 
 ### Terraform magic
 ```

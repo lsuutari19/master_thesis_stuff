@@ -38,17 +38,17 @@ resource "libvirt_network" "internal-network" {
 
 # testing with a self created default network
 # delete this and change network_interface { network_name = "default" } to use previous config
-resource "libvirt_network" "default_network" {
+/* resource "libvirt_network" "default_network" {
     name = "default_network"
     mode = "nat"
-    addresses = ["192.168.122.1/24"]
+    addresses = ["192.168.122.2/24"]
     dns {
       enabled = true
     }
     dhcp {
       enabled = true
     }
-}
+} */
 
 
 resource "libvirt_domain" "domain-opnsense" {
@@ -64,7 +64,7 @@ resource "libvirt_domain" "domain-opnsense" {
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
-    network_name   = libvirt_network.default_network.name
+    network_name   = "default"
   }
 
   network_interface {
