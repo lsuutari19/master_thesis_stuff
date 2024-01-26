@@ -24,7 +24,7 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   pool           = "default"
 }
 
-resource "libvirt_network" "internal-network" {
+/* resource "libvirt_network" "internal-network" {
   name = "cyber-range-LAN"
   mode = "nat"
   addresses = ["10.10.10.10/24"]
@@ -34,11 +34,11 @@ resource "libvirt_network" "internal-network" {
   dhcp {
     enabled = true
   }
-}
+} */
 
 # testing with a self created default network
 # delete this and change network_interface { network_name = "default" } to use previous config
-/* resource "libvirt_network" "default_network" {
+resource "libvirt_network" "default_network" {
     name = "default_network"
     mode = "nat"
     addresses = ["192.168.122.2/24"]
@@ -48,7 +48,17 @@ resource "libvirt_network" "internal-network" {
     dhcp {
       enabled = true
     }
-} */
+}
+
+resource "libvirt_network" "vmbr0-net" {
+  name = "vmbro0-net"
+  mode = "none"
+}
+
+resource "libvirt_network" "vmbr1-net" {
+  name = "vmbro1-net"
+  mode = "none"
+}
 
 
 resource "libvirt_domain" "domain-opnsense" {
@@ -64,11 +74,14 @@ resource "libvirt_domain" "domain-opnsense" {
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
-    network_name   = "default"
+    network_name   = libvirt_network.default_network.name
   }
 
   network_interface {
-    network_name = libvirt_network.internal-network.name
+    network_name = libvirt_network.vmbr0-net.name
+  }
+  network_interface {
+    network_name = libvirt_network.vmbr1-net.name
   }
 
   console {
