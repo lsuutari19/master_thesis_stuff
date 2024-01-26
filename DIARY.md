@@ -154,3 +154,8 @@ Got access to VM LAN from host had to configure it to point out to 192.168.122.x
 
 lan vtnet0 192.168.1.100
 wan vtnet1 10.10.10.131
+
+# 26/1/2024
+Finally got access to the Web GUI by creating an isolated network interface that connects the opnsense kvm and the probing machine, this will work as the "internal network". Next step is to configure access through the default-interface so that we can access the opnsense machine with the host system. (for nmap stuff etc.)
+
+Configuring the system requires you to run terraform apply, choose option 1 in opnsense and the following: n n vtnet0 vtnet1 vtnet2 y
