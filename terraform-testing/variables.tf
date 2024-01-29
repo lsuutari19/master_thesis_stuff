@@ -15,6 +15,11 @@ variable "ubuntu_img_url" {
   default = "ubuntu-desktop.iso"
 }
 
+variable "kali_img_url" {
+  description = "kali desktop image"
+  default = "kali-linux-2023.4-qemu-amd64.qcow2"
+}
+
 variable "vm_hostname" {
   description = "vm hostname"
   default     = "kvm-opnsense"
