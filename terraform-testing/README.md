@@ -111,7 +111,7 @@ sudo virsh pool-define /dev/stdin <<EOF
 <pool type='dir'>
   <name>default</name>
   <target>
-    <path>/var/lib/libvirt/images</path>
+    <path>$PWD/images</path>
   </target>
 </pool>
 EOF

@@ -32,7 +32,7 @@ resource "libvirt_domain" "ubuntu-domain" {
   cloudinit = libvirt_cloudinit_disk.ubuntu-commoninit.id
 
   network_interface {
-    network_name   = libvirt_network.internal-network.name
+    network_name   = libvirt_network.vmbr0-net.name
   }
 
   console {
