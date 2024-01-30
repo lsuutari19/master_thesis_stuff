@@ -168,5 +168,5 @@ https://www.cynet.com/attack-techniques-hands-on/how-hackers-use-icmp-tunneling-
 
 I think the first idea would be that students would nmap scan the internal network to find the IP address of the ubuntu machine, then move on to do what the icmpsh tutorial above describes.
 
-
+Now there are 3 machines in the internal network, opnsense firewall, kali attacking machine and ubuntu target machine (currently desktop image, we can make it be GUI:less since students arent supposd to directly access it)
 
