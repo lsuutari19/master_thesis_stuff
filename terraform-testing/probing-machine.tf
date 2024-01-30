@@ -26,7 +26,7 @@ resource "libvirt_domain" "ubuntu-domain" {
   machine = "q35"
   
   xml {
-    xslt = file("cdrom-model.xsl")
+    xslt = file("${path.module}/config/cdrom-model.xsl")
   }
 
   cloudinit = libvirt_cloudinit_disk.ubuntu-commoninit.id

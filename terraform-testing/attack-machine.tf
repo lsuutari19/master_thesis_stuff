@@ -6,7 +6,7 @@ resource "libvirt_volume" "kali-qcow2" {
 }
 
 data "template_file" "kali-user_data" {
-  template = file("${path.module}/config/ubuntu_cloud_init.yml")
+  template = file("${path.module}/config/kali_cloud_init.yml")
 }
 
 data "template_file" "kali-network_config" {
@@ -26,7 +26,7 @@ resource "libvirt_domain" "kali-domain" {
   machine = "q35"
   
   xml {
-    xslt = file("cdrom-model.xsl")
+    xslt = file("${path.module}/config/cdrom-model.xsl")
   }
 
   cloudinit = libvirt_cloudinit_disk.kali-commoninit.id
@@ -34,6 +34,13 @@ resource "libvirt_domain" "kali-domain" {
   network_interface {
     network_name   = libvirt_network.vmbr0-net.name
   }
+
+
+/*   filesystem {
+    source = "./utils"
+    target = "tmp"
+    readonly = false
+  } */
 
   console {
     type        = "pty"
@@ -56,7 +63,6 @@ resource "libvirt_domain" "kali-domain" {
     listen_type = "address"
     autoport    = true
   }
-
 }
 
 

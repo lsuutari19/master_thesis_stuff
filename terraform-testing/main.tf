@@ -68,7 +68,7 @@ resource "libvirt_domain" "domain-opnsense" {
   machine = "q35"
   
   xml {
-    xslt = file("cdrom-model.xsl")
+    xslt = file("${path.module}/config/cdrom-model.xsl")
   }
 
   cloudinit = libvirt_cloudinit_disk.commoninit.id

@@ -170,3 +170,14 @@ I think the first idea would be that students would nmap scan the internal netwo
 
 Now there are 3 machines in the internal network, opnsense firewall, kali attacking machine and ubuntu target machine (currently desktop image, we can make it be GUI:less since students arent supposd to directly access it)
 
+
+
+
+# W.I.P
+- auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
+    - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
+        - related to this also: for some reason the filesystem doesnt accept relative path to utils currently...
+- figure out if we could still use pfSense instead (Asad prefers its more advanced web GUI options)
+- configuring opnSense/pfSense to work as the router that assigns the IP addresses in the internal network
+- cleanup repo --> especially config folder (some of the cloudinit stuff not currently used such as docker initialization to ubuntu)
+- leave the setting up of LAN/WAN/opt1 to students in the firewall vm? (takes propably around 15 minutes with "vague" instructions)
