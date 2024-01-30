@@ -36,11 +36,12 @@ resource "libvirt_domain" "kali-domain" {
   }
 
 
-/*   filesystem {
-    source = "./utils"
+  filesystem {
+    # I have no idea why this has to be so complicated for specifying a relative path but it has something to do with the different OS with host and target vm :D
+    source = "${pathexpand(abspath("${path.module}/utils"))}"
     target = "tmp"
     readonly = false
-  } */
+  }
 
   console {
     type        = "pty"
