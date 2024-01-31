@@ -22,6 +22,10 @@ sudo virsh net-destroy default_network
 sudo virsh net-undefine default_network
 sudo virsh net-destroy cyber-range-LAN
 sudo virsh net-undefine cyber-range-LAN
+sudo virsh net-destroy vmbro0-net
+sudo virsh net-undefine vmbro0-net
+sudo virsh net-destroy vmbro1-net
+sudo virsh net-undefine vmbro1-net
 
 result=$(sudo virsh net-list --all)
 if [[ $result == *default_network* || $result == *cyber-range-LAN* ]]; then

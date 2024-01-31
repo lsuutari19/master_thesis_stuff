@@ -10,6 +10,13 @@ resource "libvirt_volume" "opnsense-qcow2" {
   format = "qcow2"
 }
 
+resource "libvirt_volume" "disk" {
+  name = "large-disk"
+  pool = "default"
+  format = "qcow2"
+  size = 10000000000
+}
+
 data "template_file" "user_data" {
   template = file("${path.module}/config/cloud_init.yml")
 }
@@ -98,6 +105,10 @@ resource "libvirt_domain" "domain-opnsense" {
 
   disk {
     volume_id = libvirt_volume.opnsense-qcow2.id
+  }
+
+  disk {
+    volume_id = libvirt_volume.disk.id
   }
 
   graphics {

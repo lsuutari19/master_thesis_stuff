@@ -5,7 +5,8 @@ variable "libvirt_disk_path" {
 
 variable "opnsense_img_url" {
   description = "opnsense image"
-  default = "opnsense.qcow2"
+  # default = "opnsense.qcow2"
+  default = "pfSense-CE-2.7.2-RELEASE-amd64.iso"
 }
 
 variable "ubuntu_img_url" {
