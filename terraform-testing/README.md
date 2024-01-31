@@ -44,6 +44,8 @@ qemu-system-x86_64 --version
 https://github.com/maurice-w/opnsense-vm-images/releases/tag/23.7.11
 (I am currently using the OPNsense-23.7.11-ufs-efi-vm-amd64.qcow2.bz2)
 
+{Insert the custom pfSense image path here}
+
 https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-qemu-amd64.7z
 
 Move the image to terraform-testing directory and rename it opnsense.qcow2
