@@ -160,6 +160,9 @@ Finally got access to the Web GUI by creating an isolated network interface that
 
 Configuring the system requires you to run terraform apply, choose option 1 in opnsense and the following: n n vtnet0 vtnet1 vtnet2 y
 
+![Idea as of now](images/state310124.drawio.png)
+
+
 # 29-30/1/2024
 Added a Kali KVM that acts as the attacker, lets obfuscate the user logon credentials to the ubuntu KVM so that students cant access it, perhaps make it boot with some kind of web server that is sending traffic that we can analyze.
 
@@ -173,6 +176,12 @@ Now there are 3 machines in the internal network, opnsense firewall, kali attack
 # 31/1/2024
 Created a VM image running pfSense via virt-manager (router_pfsense.qcow2) and deployed it with minimal required configurations, shared the file with Asad. Waiting for his input.
 
+
+# 01/2/2024
+We are now at the stage where we just need to configure the network settings so that we can start implementing the tasks, Asad has been researching this, I will also take a look and start ideaing how the pfSense/opnsense firewall could work as the router that assigns the IP addresses in the internal network.
+
+
+![Idea as of now](images/state020124.drawio.png)
 
 # W.I.P
 - auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
