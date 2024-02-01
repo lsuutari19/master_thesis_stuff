@@ -39,10 +39,14 @@ https://www.qemu.org/download/#linux
 ```
 qemu-system-x86_64 --version
 ```
-### download the required opnsense image
-https://github.com/maurice-w/opnsense-vm-images/releases/tag/23.7.11
+### download the relevant images & place them in the directory containing main.tf
 
+https://github.com/maurice-w/opnsense-vm-images/releases/tag/23.7.11
 (I am currently using the OPNsense-23.7.11-ufs-efi-vm-amd64.qcow2.bz2)
+
+{Insert the custom pfSense image path here}
+
+https://cdimage.kali.org/kali-2023.4/kali-linux-2023.4-qemu-amd64.7z
 
 Move the image to terraform-testing directory and rename it opnsense.qcow2
 
@@ -91,6 +95,16 @@ terraform apply
 
 
 ## Issues & fixes:
+```
+General problems with deployment:
+solution:
+run the cleanup.sh script
+
+NOTE: After first successful deployment, do not use the cleanup.sh anymore, instead use terraform destroy!!
+
+```
+
+
 ```
 problem:
 Error: Error defining libvirt domain: virError(Code=67, Domain=10, Message='unsupported configuration: Emulator '/usr/bin/qemu-system-x86_64' does not support virt type 'kvm'')

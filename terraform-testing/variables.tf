@@ -5,7 +5,9 @@ variable "libvirt_disk_path" {
 
 variable "opnsense_img_url" {
   description = "opnsense image"
-  default = "opnsense.qcow2"
+  # default = "opnsense.qcow2"
+  # default = "pfSense-CE-2.7.2-RELEASE-amd64.iso"
+  default = "images/router_pfsense.qcow2"
 }
 
 variable "ubuntu_img_url" {
@@ -13,6 +15,11 @@ variable "ubuntu_img_url" {
   # default = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
   # default = "https://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img"
   default = "ubuntu-desktop.iso"
+}
+
+variable "kali_img_url" {
+  description = "kali desktop image"
+  default = "kali-linux-2023.4-qemu-amd64.qcow2"
 }
 
 variable "vm_hostname" {

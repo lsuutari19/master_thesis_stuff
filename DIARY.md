@@ -159,3 +159,25 @@ wan vtnet1 10.10.10.131
 Finally got access to the Web GUI by creating an isolated network interface that connects the opnsense kvm and the probing machine, this will work as the "internal network". Next step is to configure access through the default-interface so that we can access the opnsense machine with the host system. (for nmap stuff etc.)
 
 Configuring the system requires you to run terraform apply, choose option 1 in opnsense and the following: n n vtnet0 vtnet1 vtnet2 y
+
+# 29-30/1/2024
+Added a Kali KVM that acts as the attacker, lets obfuscate the user logon credentials to the ubuntu KVM so that students cant access it, perhaps make it boot with some kind of web server that is sending traffic that we can analyze.
+
+implementing icmpsh in this scenario would be pretty simple.
+https://www.cynet.com/attack-techniques-hands-on/how-hackers-use-icmp-tunneling-to-own-your-network/
+
+I think the first idea would be that students would nmap scan the internal network to find the IP address of the ubuntu machine, then move on to do what the icmpsh tutorial above describes.
+
+Now there are 3 machines in the internal network, opnsense firewall, kali attacking machine and ubuntu target machine (currently desktop image, we can make it be GUI:less since students arent supposd to directly access it)
+
+# 31/1/2024
+Created a VM image running pfSense via virt-manager (router_pfsense.qcow2) and deployed it with minimal required configurations, shared the file with Asad. Waiting for his input.
+
+
+# W.I.P
+- auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
+    - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
+- figure out if we could still use pfSense instead (Asad prefers its more advanced web GUI options)
+- configuring opnSense/pfSense to work as the router that assigns the IP addresses in the internal network
+- cleanup repo --> especially config folder (some of the cloudinit stuff not currently used such as docker initialization to ubuntu)
+- leave the setting up of LAN/WAN/opt1 to students in the firewall vm? (takes propably around 15 minutes with "vague" instructions)
