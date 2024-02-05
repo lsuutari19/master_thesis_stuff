@@ -10,3 +10,4 @@ terraform_kvm/pfSense.img
 *.tfstate
 *.iso
 *-qcow2
+large-disk

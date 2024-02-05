@@ -1,79 +1,67 @@
 #   export TERRAFORM_LIBVIRT_TEST_DOMAIN_TYPE="qemu"
 provider "libvirt" {
-   uri = "qemu:///system"
+  uri = "qemu:///system"
 }
 
 resource "libvirt_volume" "opnsense-qcow2" {
-  name = "opnsense-qcow2"
-  pool = "default"
+  name   = "opnsense-qcow2"
+  pool   = "default"
   source = var.opnsense_img_url
   format = "qcow2"
 }
 
 resource "libvirt_volume" "disk" {
-  name = "large-disk"
-  pool = "default"
+  name   = "large-disk"
+  pool   = "default"
   format = "qcow2"
-  size = 10000000000
+  size   = 10000000000
 }
 
 data "template_file" "user_data" {
   template = file("${path.module}/config/cloud_init.yml")
 }
 
-data "template_file" "network_config" {
-  template = file("${path.module}/config/network_config.yml")
-}
+#data "template_file" "network_config" {
+#  template = file("${path.module}/config/network_config.yml")
+#}
 
 resource "libvirt_cloudinit_disk" "commoninit" {
-  name           = "commoninit.iso"
-  user_data      = data.template_file.user_data.rendered
-  pool           = "default"
+  name      = "commoninit.iso"
+  user_data = data.template_file.user_data.rendered
+  pool      = "default"
 }
 
-/* resource "libvirt_network" "internal-network" {
-  name = "cyber-range-LAN"
-  mode = "nat"
-  addresses = ["10.10.10.10/24"]
-  dns {
-    enabled = true
-  }
+resource "libvirt_network" "default_network" {
+  name      = "default_network"
+  mode      = "nat"
+  bridge    = "virbr1"
+  addresses = ["192.168.122.0/24"]
   dhcp {
     enabled = true
   }
-} */
-
-# testing with a self created default network
-# delete this and change network_interface { network_name = "default" } to use previous config
-resource "libvirt_network" "default_network" {
-    name = "default_network"
-    mode = "nat"
-    addresses = ["192.168.122.2/24"]
-    dns {
-      enabled = true
-    }
-    dhcp {
-      enabled = true
-    }
 }
 
 resource "libvirt_network" "vmbr0-net" {
-  name = "vmbro0-net"
-  mode = "none"
+  name       = "vmbr0-net"
+  mode       = "bridge"
+  bridge     = "virbr1"
+  addresses  = ["10.10.10.0/24"]
+  depends_on = [libvirt_network.default_network]
 }
 
 resource "libvirt_network" "vmbr1-net" {
-  name = "vmbro1-net"
+  name = "vmbr1-net"
   mode = "none"
 }
 
 
 resource "libvirt_domain" "domain-opnsense" {
-  name   = var.vm_hostname
-  memory = "2048"
-  vcpu   = 2
-  machine = "q35"
-  
+  name       = var.vm_hostname
+  memory     = "2048"
+  vcpu       = 2
+  machine    = "q35"
+  depends_on = [libvirt_network.default_network]
+
   xml {
     xslt = file("${path.module}/config/cdrom-model.xsl")
   }
@@ -81,7 +69,8 @@ resource "libvirt_domain" "domain-opnsense" {
   cloudinit = libvirt_cloudinit_disk.commoninit.id
 
   network_interface {
-    network_name   = libvirt_network.default_network.name
+    network_name = libvirt_network.default_network.name
+    # addresses    = ["dhcp"]
   }
 
   network_interface {

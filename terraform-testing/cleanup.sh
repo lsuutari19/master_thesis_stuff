@@ -6,11 +6,14 @@ echo "Starting cleanup..."
 sudo virsh destroy kvm-opnsense
 sudo virsh undefine kvm-opnsense --remove-all-storage
 
+sudo virsh destroy kali-domain
+sudo virsh undefine kali-domain --remove-all-storage
+
 sudo virsh destroy ubuntu-domain
 sudo virsh undefine ubuntu-domain --remove-all-storage
 
 result=$(sudo virsh list --all)
-if [[ $result == *kvm-opnsense* || $result == *ubuntu-domain* ]]; then
+if [[ $result == *kvm-opnsense* || $result == *ubuntu-domain* || $result == *kali-domain*]]; then
     echo "VM domains could not be destroyed."
     exit 1;
 else
@@ -20,15 +23,13 @@ fi
 # Command to destroy the virtual network
 sudo virsh net-destroy default_network
 sudo virsh net-undefine default_network
-sudo virsh net-destroy cyber-range-LAN
-sudo virsh net-undefine cyber-range-LAN
-sudo virsh net-destroy vmbro0-net
-sudo virsh net-undefine vmbro0-net
-sudo virsh net-destroy vmbro1-net
-sudo virsh net-undefine vmbro1-net
+sudo virsh net-destroy vmbr0-net
+sudo virsh net-undefine vmbr0-net
+sudo virsh net-destroy vmbr1-net
+sudo virsh net-undefine vmbr1-net
 
 result=$(sudo virsh net-list --all)
-if [[ $result == *default_network* || $result == *cyber-range-LAN* ]]; then
+if [[ $result == *default_network* || $result == *vmbr* ]]; then
     echo "Virtual networks could not be destroyed."
     exit 1;
 else
