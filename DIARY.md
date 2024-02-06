@@ -183,6 +183,11 @@ We are now at the stage where we just need to configure the network settings so 
 
 ![Idea as of now](images/state020124.drawio.png)
 
+# 06/02/2024
+New bridged network setup for lab 2, we create a custom virbr1 bridge that is used to connect the two networks together, both of these networks are attached to pfSense and only the internal network is attached to the VMs with this after configuration the pfSense VM should start serving DHCP leases to the other VMs in the network.
+
+![Idea as of now](images/state050224.drawio.png)
+
 # W.I.P
 - auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
     - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
