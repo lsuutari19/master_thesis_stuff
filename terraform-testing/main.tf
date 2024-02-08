@@ -21,27 +21,15 @@ data "template_file" "user_data" {
   template = file("${path.module}/config/cloud_init.yml")
 }
 
-data "template_file" "network_config" {
-  template = file("${path.module}/config/network_config.yml")
-}
+#data "template_file" "network_config" {
+#  template = file("${path.module}/config/network_config.yml")
+#}
 
 resource "libvirt_cloudinit_disk" "commoninit" {
   name           = "commoninit.iso"
   user_data      = data.template_file.user_data.rendered
   pool           = "default"
 }
-
-/* resource "libvirt_network" "internal-network" {
-  name = "cyber-range-LAN"
-  mode = "nat"
-  addresses = ["10.10.10.10/24"]
-  dns {
-    enabled = true
-  }
-  dhcp {
-    enabled = true
-  }
-} */
 
 # testing with a self created default network
 # delete this and change network_interface { network_name = "default" } to use previous config
@@ -59,6 +47,7 @@ resource "libvirt_network" "default_network" {
 
 resource "libvirt_network" "vmbr0-net" {
   name = "vmbro0-net"
+  #addresses = ["10.0.0.1/24"]
   mode = "none"
 }
 

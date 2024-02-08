@@ -9,6 +9,9 @@ sudo virsh undefine kvm-opnsense --remove-all-storage
 sudo virsh destroy ubuntu-domain
 sudo virsh undefine ubuntu-domain --remove-all-storage
 
+sudo virsh destroy kali-domain
+sudo virsh undefine kali-domain --remove-all-storage
+
 result=$(sudo virsh list --all)
 if [[ $result == *kvm-opnsense* || $result == *ubuntu-domain* ]]; then
     echo "VM domains could not be destroyed."
@@ -26,6 +29,11 @@ sudo virsh net-destroy vmbro0-net
 sudo virsh net-undefine vmbro0-net
 sudo virsh net-destroy vmbro1-net
 sudo virsh net-undefine vmbro1-net
+
+sudo virsh net-destroy vmbr0-net
+sudo virsh net-undefine vmbr0-net
+sudo virsh net-destroy vmbr1-net
+sudo virsh net-undefine vmbr1-net
 
 result=$(sudo virsh net-list --all)
 if [[ $result == *default_network* || $result == *cyber-range-LAN* ]]; then
@@ -49,10 +57,10 @@ fi
 
 
 # Command to delete volumes
-sudo virsh vol-delete /var/lib/libvirt/images/commoninit.iso
-sudo virsh vol-delete /var/lib/libvirt/images/opnsense-qcow2
-sudo virsh vol-delete /var/lib/libvirt/images/ubuntu-commoninit.iso
-sudo virsh vol-delete /var/lib/libvirt/images/ubuntu-qcow2
+sudo virsh vol-delete  ./images/commoninit.iso
+sudo virsh vol-delete ./images/opnsense-qcow2
+sudo virsh vol-delete ./images/ubuntu-commoninit.iso
+sudo virsh vol-delete ./images/ubuntu-qcow2
 
 result=$(sudo virsh vol-list --pool default)
 if [[ $result == *default* ]]; then

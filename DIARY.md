@@ -183,10 +183,22 @@ We are now at the stage where we just need to configure the network settings so 
 
 ![Idea as of now](images/state020124.drawio.png)
 
+# 06/02/2024
+New bridged network setup for lab 2, we create a custom virbr1 bridge that is used to connect the two networks together, both of these networks are attached to pfSense and only the internal network is attached to the VMs with this after configuration the pfSense VM should start serving DHCP leases to the other VMs in the network.
+
+![Idea as of now](images/state050224.drawio.png)
+
+# 08/02/2024
+We have settled on using the current version on master branch for the lab2, there are still some issues but it should get the job done. New focus is on creating a web server on to the internal network that the students could then attack. Currently 2 ideas of how this could be achieved:
+1. Docker containers will be binded to the virbr0 bridge like this: https://serverfault.com/questions/948339/networking-between-kvm-vm-and-docker-container-on-same-host (haven't got the container to bind to 192.168.122.xxx or 10.0.0.xxx though it still gets 172.19.0.xxx)
+2. By manually setting up docker containers to bind to an IP address in the internal network range (working) guide on docs
+3. Creating an ubuntu image that contains all the tools required to set up the web server
+
+
+
 # W.I.P
 - auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
     - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
-- figure out if we could still use pfSense instead (Asad prefers its more advanced web GUI options)
-- configuring opnSense/pfSense to work as the router that assigns the IP addresses in the internal network
 - cleanup repo --> especially config folder (some of the cloudinit stuff not currently used such as docker initialization to ubuntu)
 - leave the setting up of LAN/WAN/opt1 to students in the firewall vm? (takes propably around 15 minutes with "vague" instructions)
+- best way to get a docker container into the same network as the terraform deployment VMs?
