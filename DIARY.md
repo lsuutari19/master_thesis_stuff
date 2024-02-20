@@ -191,14 +191,15 @@ New bridged network setup for lab 2, we create a custom virbr1 bridge that is us
 # 08/02/2024
 We have settled on using the current version on master branch for the lab2, there are still some issues but it should get the job done. New focus is on creating a web server on to the internal network that the students could then attack. Currently 2 ideas of how this could be achieved:
 1. Docker containers will be binded to the virbr0 bridge like this: https://serverfault.com/questions/948339/networking-between-kvm-vm-and-docker-container-on-same-host (haven't got the container to bind to 192.168.122.xxx or 10.0.0.xxx though it still gets 172.19.0.xxx)
-2. By manually setting up docker containers to bind to an IP address in the internal network range (working) guide on docs
+2. By manually setting up docker containers to bind to an IP address in the internal network range, guide on docs
 3. Creating an ubuntu image that contains all the tools required to set up the web server
+4. Doing the 2. but from terraform
 
+# 20/02/2024
+Back from the sick leave. Lab 1 has been completed current implementation is with 3 different KVMs. Lets leave dockerizing the web server for future work for now.
 
 
 # W.I.P
 - auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
     - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
-- cleanup repo --> especially config folder (some of the cloudinit stuff not currently used such as docker initialization to ubuntu)
-- leave the setting up of LAN/WAN/opt1 to students in the firewall vm? (takes propably around 15 minutes with "vague" instructions)
-- best way to get a docker container into the same network as the terraform deployment VMs?
+- Dockerize web server, docs/docker_deployment.odt shows how we can bind an existing docker container to the internal network. This does mean additional steps (deploying the container & binding it manually)

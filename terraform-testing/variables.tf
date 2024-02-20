@@ -14,12 +14,12 @@ variable "ubuntu_img_url" {
   description = "ubuntu image"
   # default = "https://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud.qcow2"
   # default = "https://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img"
-  default = "ubuntu-desktop.iso"
+  default = "images/ubuntu22.04.copy.qcow2"
 }
 
 variable "kali_img_url" {
   description = "kali desktop image"
-  default = "kali-linux-2023.4-qemu-amd64.qcow2"
+  default     = "kali-linux-2023.4-qemu-amd64.qcow2"
 }
 
 variable "vm_hostname" {

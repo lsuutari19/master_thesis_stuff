@@ -1,6 +1,6 @@
 resource "libvirt_volume" "ubuntu-qcow2" {
-  name = "ubuntu-qcow2"
-  pool = "default"
+  name   = "ubuntu-qcow2"
+  pool   = "default"
   source = var.ubuntu_img_url
   format = "qcow2"
 }
@@ -14,17 +14,17 @@ data "template_file" "ubuntu-network_config" {
 }
 
 resource "libvirt_cloudinit_disk" "ubuntu-commoninit" {
-  name           = "ubuntu-commoninit.iso"
-  user_data      = data.template_file.ubuntu-user_data.rendered
-  pool           = "default"
+  name      = "ubuntu-commoninit.iso"
+  user_data = data.template_file.ubuntu-user_data.rendered
+  pool      = "default"
 }
 
 resource "libvirt_domain" "ubuntu-domain" {
-  name   = "ubuntu-domain"
-  memory = "2048"
-  vcpu   = 2
+  name    = "ubuntu-domain"
+  memory  = "2048"
+  vcpu    = 2
   machine = "q35"
-  
+
   xml {
     xslt = file("${path.module}/config/cdrom-model.xsl")
   }
@@ -32,7 +32,7 @@ resource "libvirt_domain" "ubuntu-domain" {
   cloudinit = libvirt_cloudinit_disk.ubuntu-commoninit.id
 
   network_interface {
-    network_name   = libvirt_network.vmbr0-net.name
+    network_name = libvirt_network.vmbr0-net.name
   }
 
   console {
