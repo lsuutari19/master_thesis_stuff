@@ -199,6 +199,63 @@ We have settled on using the current version on master branch for the lab2, ther
 Back from the sick leave. Lab 1 has been completed current implementation is with 3 different KVMs. Lets leave dockerizing the web server for future work for now.
 
 
+# 21/02/2024
+## Wireguard installation to pfSense
+1. access WebGUI
+2. System -> Package Manager
+3. Search WireGuard -> Confirm install
+
+## Wireguard configuration in pfSense
+### Ideally we wouldnt want to use the CLI after we have gained access to the WebGUI anymore, so that is why we are using the WebGUI shell for configuration instead of using the pfSense VM CLI shell.
+1. Diagnostics -> Command Prompt
+2. wg genkey | tee privatekey | wg pubkey > publickey
+3. Create tunnel with following information:
+```
+Enable: Checked
+Description: Remote Access
+Listen Port: 51820
+Interface Keys: *generate*
+Interface Addresses: 10.6.210.1/24
+```
+4. Enable WireGuard by clicking settings -> check "Enable WireGuard"
+
+https://docs.netgate.com/pfsense/en/latest/recipes/wireguard-ra.html
+
+5. Peer config VPN->WireGuard->Peers "Add Peer"
+6. Firewall rules for WAN
+7. Firewall rules for WireGuard
+
+## Client WireGuard configuration
+
+
+
+# Version 2
+
+1. Install Wireguard from the pfSense WebGUI (System->Package Manager)
+2. WireGuard rule to allow all traffic
+3. WAN rule to allow UDP from 172.16.16.0 to port 51420
+4. Firewall Outbound rule for NAT (select Hybrid Outbound, create mapping for WAN 172.16.16.0)
+5. Configure your Client WireGuard
+6. Ping machines in the internal network (perhaps even access the webserver from the ubuntu machine in the internal network)
+
+
+Notes so far;
+1. Setting up the VPN for wireguard to the pfsense and the client seems straight-forward enough (should take around an hour for students)
+2. But there is something weird going on currently with the pfSense and the internal network (see what I sent to Asad)
+    This happens with Asad's provided pfsense image
+
+
+1. host: terraform apply 
+2. pfsense: set interface ip addresses --> go through the options to set 10.0.0.1
+3. virt-manager: restart kali & ubuntu (optional)
+3. kali: access webgui and play around with VPN settings
+4. host: ping <kali_ip>
+5. kali: refresh the page with webgui (connection lost)
+
+From metting: machines in DMZ can be reached by LAN directly (internal network) and also from Host machine through pfsense routing. Machines in DMZ cannot reach anything outside DMZ.
+Furikata?
+Find IP addresses in LAN to find the hidden device and block it from the internal network with firewall
+
 # W.I.P
 - auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
     - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
