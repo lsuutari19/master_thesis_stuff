@@ -200,6 +200,7 @@ Back from the sick leave. Lab 1 has been completed current implementation is wit
 
 
 # 21/02/2024
+## A lot of this stuff is redundant and just notes for later reference.
 ## Wireguard installation to pfSense
 1. access WebGUI
 2. System -> Package Manager

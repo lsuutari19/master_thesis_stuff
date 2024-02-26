@@ -11,3 +11,5 @@ terraform_kvm/pfSense.img
 *.iso
 *-qcow2
 large-disk
+*.ovpn
+*.zip
