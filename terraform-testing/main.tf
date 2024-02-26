@@ -25,19 +25,6 @@ resource "libvirt_cloudinit_disk" "commoninit" {
   user_data      = data.template_file.user_data.rendered
   pool           = "default"
 }
-/* resource "libvirt_network" "internal-network" {
-  name = "cyber-range-LAN"
-  mode = "nat"
-  addresses = ["10.10.10.10/24"]
-  dns {
-    enabled = true
-  }
-  dhcp {
-    enabled = true
-  }
-} */
-# testing with a self created default network
-# delete this and change network_interface { network_name = "default" } to use previous config
 resource "libvirt_network" "default_network" {
     name = "default_network"
     mode = "nat"
