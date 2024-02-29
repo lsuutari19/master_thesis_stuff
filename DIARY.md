@@ -152,8 +152,6 @@ the host PC is now able to reach the VM WAN, still need to figure out how to acc
 
 Got access to VM LAN from host had to configure it to point out to 192.168.122.xxx, now needs to get the web gui up and running as well.
 
-lan vtnet0 192.168.1.100
-wan vtnet1 10.10.10.131
 
 # 26/1/2024
 Finally got access to the Web GUI by creating an isolated network interface that connects the opnsense kvm and the probing machine, this will work as the "internal network". Next step is to configure access through the default-interface so that we can access the opnsense machine with the host system. (for nmap stuff etc.)
@@ -176,6 +174,8 @@ Now there are 3 machines in the internal network, opnsense firewall, kali attack
 # 31/1/2024
 Created a VM image running pfSense via virt-manager (router_pfsense.qcow2) and deployed it with minimal required configurations, shared the file with Asad. Waiting for his input.
 
+## The VMs are now provided like this, first we create them and customize them how we want and then supply them to students
+
 
 # 01/2/2024
 We are now at the stage where we just need to configure the network settings so that we can start implementing the tasks, Asad has been researching this, I will also take a look and start ideaing how the pfSense/opnsense firewall could work as the router that assigns the IP addresses in the internal network.
@@ -184,6 +184,7 @@ We are now at the stage where we just need to configure the network settings so 
 ![Idea as of now](images/state020124.drawio.png)
 
 # 06/02/2024
+## This isnt used!
 New bridged network setup for lab 2, we create a custom virbr1 bridge that is used to connect the two networks together, both of these networks are attached to pfSense and only the internal network is attached to the VMs with this after configuration the pfSense VM should start serving DHCP leases to the other VMs in the network.
 
 ![Idea as of now](images/state050224.drawio.png)
@@ -320,11 +321,68 @@ ____________________________________________________________
 2. Create user profile System->Users
 3. Create User cert during process
 
+## 26/02/2024
 
-# W.I.P
+# task 3 descriptions:
+Create a VPN for an organization that has your initials in it i.e. if your name is Pekka Pouta, it would be PP. The organization is based in Oulu, Pohjois-Pohjanmaa. Images of the certs you create, Client setup and server setup tabs in OpenVPN tab.
+
+2 options: manual or wizard installation
+
+Add instructions:
+- detailed steps for what the students should do
+- to explain what the certificates do
+- how openvpn creates the connection between the two devices
+- what processes does the openvpn automate for the firewall (rules)
+
+## Task 2 pfSense misconfigurations:
+## NOTE: BACKUP YOUR PREVIOUS CONFIGURATION FOR PFSENSE IN DIAGNOSTICS -> Backup & Restore
+
+pfSense good practices
+Privilege escalation
+Incident response
+
+### issues/ideas
+#### We can provide all of these setups with the Diagnostics -> Backup & Restore option
+1. Suspicious looking Admin user
+2. Connection from internal network to DMZ has been blocked
+3. WAN/DMZ rules that pass all connections
+4. Firewall/NAT/Outbound changed to Hybrid outbound with pass all LAN/WAN
+5. WAN interface "Block private networks and loopback addresses" unchecked
+6. A) Modified a file so that it matches a previous version of the file that enabled vulnerability on the firewall: i.e. https://www.sonarsource.com/blog/pfsense-vulnerabilities-sonarcloud/ , in this case it would be status_logs_filter_dynamic.php
+6. B) A command injection vulnerability in the function restore_rrddata() of Netgate pfSense v2.7.0 allows authenticated attackers to execute arbitrary commands via manipulating the contents of an XML file supplied to the component config.xml. 
+https://vulners.com/cve/CVE-2023-27253
+
+
+## TO-DO before holidays:
+- File that needs to be changed fo task 2
+- More stuff to task 2?
+
+### fixes
+1. Remove suspicious Admin user
+2. - 5. Remove rules that block/allow connections described above
+6. Use the pfSense webGUI Diagnostics/Command Prompt to figure out what the vulnerability (we can just give them a flag or something that points to the site explaining the vulnerability) is and how it was patched in a newer version of pfSense. "find . -mtime -1" NOTE: this will propably require us to add the file manually into the pfSense VM image that we are giving the students.
+
+My issue with this kind of task is that it just involves student traversing the pfSense WebGUI tyring to sniff out things that catch their attention. If we do decide to go with all of these issues perhaps we could give full credit for finding/fixing for example 5 out of 8 issues.
+
+![alt text](./images/restore_backup_pfsense.png)
+
+
+# W.I.P?
 - auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
     - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
-
 - actually this seems like the easier method for above: https://www.debugpoint.com/share-folder-virt-manager/
 
 - Dockerize web server, docs/docker_deployment.odt shows how we can bind an existing docker container to the internal network. This does mean additional steps (deploying the container & binding it manually)
+
+- At least make the VMs take up less space.
+
+# Future work
+- Dockerize VMs in lab1/lab2, find more lightweight solutions?
+- Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
+
+# Things to write about in thesis:
+- pfsense vs opnsense
+- qemu virtualization solution compared to others
+- terraform
+- task setups/configurations
+- Future work section above
