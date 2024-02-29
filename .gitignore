@@ -13,3 +13,4 @@ terraform_kvm/pfSense.img
 large-disk
 *.ovpn
 *.zip
+*lock.

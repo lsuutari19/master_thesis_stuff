@@ -334,6 +334,8 @@ Add instructions:
 - how openvpn creates the connection between the two devices
 - what processes does the openvpn automate for the firewall (rules)
 
+https://www.researchgate.net/publication/368831275_CSEIT1835225_Study_on_Virtual_Private_Network_VPN_VPN%27s_Protocols_And_Security
+
 ## Task 2 pfSense misconfigurations:
 ## NOTE: BACKUP YOUR PREVIOUS CONFIGURATION FOR PFSENSE IN DIAGNOSTICS -> Backup & Restore
 
@@ -368,13 +370,10 @@ My issue with this kind of task is that it just involves student traversing the 
 
 
 # W.I.P?
-- auto mount the utils folder to kali vm (currently requires user to run "sudo mount -t 9p -o trans=virtio,version=9p2000.L,rw tmp ~/Desktop")
-    - This requires configuring kali_cloud_init.yml to do something like: https://github.com/dmacvicar/terraform-provider-libvirt/issues/782
-- actually this seems like the easier method for above: https://www.debugpoint.com/share-folder-virt-manager/
-
-- Dockerize web server, docs/docker_deployment.odt shows how we can bind an existing docker container to the internal network. This does mean additional steps (deploying the container & binding it manually)
-
-- At least make the VMs take up less space.
+- At least make the VMs take up less space, preferrably minimal versions
+- Branches of VMs
+- Task 2 B/C task, give Asad the file(s) that needs to be changed in the pfSense filesystem
+- Screenshot(s) for the backup/restore process of pfSense configs for task 2
 
 # Future work
 - Dockerize VMs in lab1/lab2, find more lightweight solutions?
@@ -386,3 +385,4 @@ My issue with this kind of task is that it just involves student traversing the 
 - terraform
 - task setups/configurations
 - Future work section above
+- VPNs
