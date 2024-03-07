@@ -14,3 +14,4 @@ large-disk
 *.ovpn
 *.zip
 *lock.
+*volume

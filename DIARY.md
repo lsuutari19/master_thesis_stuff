@@ -368,21 +368,36 @@ My issue with this kind of task is that it just involves student traversing the 
 
 ![alt text](./images/restore_backup_pfsense.png)
 
+## After skiing holidays
+Ubuntu cloud server image is now the minimal ubuntu VM. Inside it has been moved a hackers_data.txt and on boot it will start docker nginx server. It also has a service called network-up.service to start the network interface in case it gets initialized in "DOWN" state. The following is this service:
+[Unit]
+Description=Enable network interface on boot
+After=network.target
+
+[Service]
+type=oneshow
+ExecStart=/sbin/ip link set enp1s0 up
+ExecStart=/sbin/dhclient enp1s0
+
 
 # W.I.P?
-- At least make the VMs take up less space, preferrably minimal versions
+- At least make the VMs take up less space, preferrably minimal versionst 
 - Branches of VMs
 - Task 2 B/C task, give Asad the file(s) that needs to be changed in the pfSense filesystem
 - Screenshot(s) for the backup/restore process of pfSense configs for task 2
+- filesystem automatic mounting in kali+terraform (the version in terraform-testing/attack-machine.tf/L39-L44 shows how we can mount it, this would need to be added to kali start config & enable the filesharing from terraform) https://registry.terraform.io/providers/DevScrewOps/libvirt/latest/docs/resources/domain#sharing-filesystem-between-libvirt-host-and-guest
 
 # Future work
 - Dockerize VMs in lab1/lab2, find more lightweight solutions?
 - Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
+- Bringing the system to cloud?
 
 # Things to write about in thesis:
 - pfsense vs opnsense
 - qemu virtualization solution compared to others
+- virt-manager+terraform vs virtualbox vs vmware
 - terraform
 - task setups/configurations
 - Future work section above
 - VPNs
+- Cloudinit VM vs other VMS
