@@ -401,3 +401,4 @@ ExecStart=/sbin/dhclient enp1s0
 - Future work section above
 - VPNs
 - Cloudinit VM vs other VMS
+- Initially virtualbox system where everything would be setup manually
