@@ -392,6 +392,9 @@ ExecStart=/sbin/dhclient enp1s0
 - Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
 - Bringing the system to cloud?
 
+
+# 
+
 # Things to write about in thesis:
 - pfsense vs opnsense
 - qemu virtualization solution compared to others
@@ -402,3 +405,5 @@ ExecStart=/sbin/dhclient enp1s0
 - VPNs
 - Cloudinit VM vs other VMS
 - Initially virtualbox system where everything would be setup manually
+- the platform doesnt run well on low end devices
+- qcow2
