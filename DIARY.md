@@ -407,3 +407,7 @@ ExecStart=/sbin/dhclient enp1s0
 - Initially virtualbox system where everything would be setup manually
 - the platform doesnt run well on low end devices
 - qcow2
+- google docs > teaching staff meetings > planning
+- nester virtualization problems
+- docker ubuntu severissä nginx auto start
+
