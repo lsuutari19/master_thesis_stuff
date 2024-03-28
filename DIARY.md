@@ -396,10 +396,6 @@ The students in laboratory session advanced in the tasks in a good pace after a 
 - Screenshot(s) for the backup/restore process of pfSense configs for task 2
 - filesystem automatic mounting in kali+terraform (the version in terraform-testing/attack-machine.tf/L39-L44 shows how we can mount it, this would need to be added to kali start config & enable the filesharing from terraform) https://registry.terraform.io/providers/DevScrewOps/libvirt/latest/docs/resources/domain#sharing-filesystem-between-libvirt-host-and-guest
 
-# Future work
-- Dockerize VMs in lab1/lab2, find more lightweight solutions?
-- Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
-- Bringing the system to cloud?
 
 Lab2: Important Notification
 Affected tasks: Task 1 only
@@ -409,11 +405,14 @@ We'll update on slack once there's a fix for this.
 Lab2: Task 1 has been updated.Students can performed this task now.
 Changes: Students will launch DDoS attack from kali linux (LAN) instead of host machine (WAN). Exercise manual is updated. (edited) 
 
-
 Certmitm task with VM and raspberry pi
 
 
-# 
+
+# Future work
+- Dockerize VMs in lab1/lab2, find more lightweight solutions?
+- Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
+- Bringing the system to cloud?
 
 # Things to write about in thesis:
 - pfsense vs opnsense
