@@ -379,6 +379,15 @@ type=oneshow
 ExecStart=/sbin/ip link set enp1s0 up
 ExecStart=/sbin/dhclient enp1s0
 
+## After after skiing holiday (so towards end of march)
+First lab session held:
+Lab 1 held at 21.03.2024
+9-10 students showed up.
+2 students requested zoom support. Reason: they have desktop pc at home with good specs and couldn’t work during lab → We should definitely support this
+Working with the VMs can be hard since the VM export size is closer to 70Gb with all the installations and AFAIK all your files get removed from the computers after logging out so this is a very tedious process to get back to speed.
+The students in laboratory session advanced in the tasks in a good pace after a little bit of help (some got to the second last task)
+
+
 
 # W.I.P?
 - At least make the VMs take up less space, preferrably minimal versionst 
@@ -391,6 +400,17 @@ ExecStart=/sbin/dhclient enp1s0
 - Dockerize VMs in lab1/lab2, find more lightweight solutions?
 - Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
 - Bringing the system to cloud?
+
+Lab2: Important Notification
+Affected tasks: Task 1 only
+Details: Webserver is not accessible on WAN interface (host machine) for DDoS attack.Recommendation: Skip task 1 for now, and do task 2 and 3 instead. Extension will be granted for this as a compensation
+We'll update on slack once there's a fix for this.
+  11:58 AM
+Lab2: Task 1 has been updated.Students can performed this task now.
+Changes: Students will launch DDoS attack from kali linux (LAN) instead of host machine (WAN). Exercise manual is updated. (edited) 
+
+
+Certmitm task with VM and raspberry pi
 
 
 # 
@@ -406,8 +426,10 @@ ExecStart=/sbin/dhclient enp1s0
 - Cloudinit VM vs other VMS
 - Initially virtualbox system where everything would be setup manually
 - the platform doesnt run well on low end devices
-- qcow2
+- qcow2 miksi
 - google docs > teaching staff meetings > planning
-- nester virtualization problems
+- nester virtualization problems, hypervisor even on high end devices
 - docker ubuntu severissä nginx auto start
-
+- modded certmitm to output data, for raspberry pi hotspot task (tcp interception)
+- mac tuki
+- tuntimäärä per op / opiskelija
