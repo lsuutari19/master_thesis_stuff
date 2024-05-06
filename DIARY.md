@@ -415,6 +415,7 @@ Certmitm task with VM and raspberry pi
 - Bringing the system to cloud?
 - Optimize lab1/lab2 for nested virtualization according to one student:
 "The other machine used was Windows laptop with significantly more RAM memory, with 32Gb RAM available, which I was luckily able to loan for this laboratory exercise purposes. With this system, nested virtualization was used to setup a host system for the tasks. I setup Kali Linux to host the Qemu virtual machines with Intel VT-X enabled to be able to run virtual machines inside a virtual machine."
+- test lab 2 setup with: https://www.plexaweb.co.uk/blog/forwarding-ports-on-a-pfsense-firewall-for-website-access/
 
 
 # Things to write about in thesis:
