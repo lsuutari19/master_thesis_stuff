@@ -413,6 +413,9 @@ Certmitm task with VM and raspberry pi
 - Dockerize VMs in lab1/lab2, find more lightweight solutions?
 - Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
 - Bringing the system to cloud?
+- Optimize lab1/lab2 for nested virtualization according to one student:
+"The other machine used was Windows laptop with significantly more RAM memory, with 32Gb RAM available, which I was luckily able to loan for this laboratory exercise purposes. With this system, nested virtualization was used to setup a host system for the tasks. I setup Kali Linux to host the Qemu virtual machines with Intel VT-X enabled to be able to run virtual machines inside a virtual machine."
+
 
 # Things to write about in thesis:
 - pfsense vs opnsense
