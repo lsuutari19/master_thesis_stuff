@@ -418,6 +418,7 @@ Certmitm task with VM and raspberry pi
 - test lab 2 setup with: https://www.plexaweb.co.uk/blog/forwarding-ports-on-a-pfsense-firewall-for-website-access/
 - Lab 1 Task 3 D) could be changed so that access to the Ubuntu is blocked, students would configure access via the WebGUI, and the default nginx needs to be edited so that we can see that the students arent cheating in task 5 by just running their own nginx server
 - Lab 2 Task 3 B) has the same problem as above; students could theoretically cheat and just show a ping from inside the internal network to Kali and just curl their own nginx server.
+- Lab 2 Task 1; better instructions, student with initials S.S. has good feedback about this task, particularly the instuctions to configure snort should be described more explicitly
 
 # Things to write about in thesis:
 - pfsense vs opnsense
