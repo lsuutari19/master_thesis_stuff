@@ -379,6 +379,15 @@ type=oneshow
 ExecStart=/sbin/ip link set enp1s0 up
 ExecStart=/sbin/dhclient enp1s0
 
+## After after skiing holiday (so towards end of march)
+First lab session held:
+Lab 1 held at 21.03.2024
+9-10 students showed up.
+2 students requested zoom support. Reason: they have desktop pc at home with good specs and couldn’t work during lab → We should definitely support this
+Working with the VMs can be hard since the VM export size is closer to 70Gb with all the installations and AFAIK all your files get removed from the computers after logging out so this is a very tedious process to get back to speed.
+The students in laboratory session advanced in the tasks in a good pace after a little bit of help (some got to the second last task)
+
+
 
 # W.I.P?
 - At least make the VMs take up less space, preferrably minimal versionst 
@@ -387,13 +396,29 @@ ExecStart=/sbin/dhclient enp1s0
 - Screenshot(s) for the backup/restore process of pfSense configs for task 2
 - filesystem automatic mounting in kali+terraform (the version in terraform-testing/attack-machine.tf/L39-L44 shows how we can mount it, this would need to be added to kali start config & enable the filesharing from terraform) https://registry.terraform.io/providers/DevScrewOps/libvirt/latest/docs/resources/domain#sharing-filesystem-between-libvirt-host-and-guest
 
+
+Lab2: Important Notification
+Affected tasks: Task 1 only
+Details: Webserver is not accessible on WAN interface (host machine) for DDoS attack.Recommendation: Skip task 1 for now, and do task 2 and 3 instead. Extension will be granted for this as a compensation
+We'll update on slack once there's a fix for this.
+  11:58 AM
+Lab2: Task 1 has been updated.Students can performed this task now.
+Changes: Students will launch DDoS attack from kali linux (LAN) instead of host machine (WAN). Exercise manual is updated. (edited) 
+
+Certmitm task with VM and raspberry pi
+
+
+
 # Future work
 - Dockerize VMs in lab1/lab2, find more lightweight solutions?
 - Wireguard instead of OpenVPN as the VPN solution (OpenVPN automates too much stuff which coul d prove to be useful for students to learn, this would cause the task to take a lot longer though so we have to recognize that in the grading)
 - Bringing the system to cloud?
-
-
-# 
+- Optimize lab1/lab2 for nested virtualization according to one student:
+"The other machine used was Windows laptop with significantly more RAM memory, with 32Gb RAM available, which I was luckily able to loan for this laboratory exercise purposes. With this system, nested virtualization was used to setup a host system for the tasks. I setup Kali Linux to host the Qemu virtual machines with Intel VT-X enabled to be able to run virtual machines inside a virtual machine."
+- test lab 2 setup with: https://www.plexaweb.co.uk/blog/forwarding-ports-on-a-pfsense-firewall-for-website-access/
+- Lab 1 Task 3 D) could be changed so that access to the Ubuntu is blocked, students would configure access via the WebGUI, and the default nginx needs to be edited so that we can see that the students arent cheating in task 5 by just running their own nginx server
+- Lab 2 Task 3 B) has the same problem as above; students could theoretically cheat and just show a ping from inside the internal network to Kali and just curl their own nginx server.
+- Lab 2 Task 1; better instructions, student with initials S.S. has good feedback about this task, particularly the instuctions to configure snort should be described more explicitly
 
 # Things to write about in thesis:
 - pfsense vs opnsense
@@ -406,8 +431,10 @@ ExecStart=/sbin/dhclient enp1s0
 - Cloudinit VM vs other VMS
 - Initially virtualbox system where everything would be setup manually
 - the platform doesnt run well on low end devices
-- qcow2
+- qcow2 miksi
 - google docs > teaching staff meetings > planning
-- nester virtualization problems
+- nester virtualization problems, hypervisor even on high end devices
 - docker ubuntu severissä nginx auto start
-
+- modded certmitm to output data, for raspberry pi hotspot task (tcp interception)
+- mac tuki
+- tuntimäärä per op / opiskelija
